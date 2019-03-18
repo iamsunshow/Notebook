@@ -733,6 +733,10 @@
         "tags": "方向"
     }],
     "Laboratory": [{
+        "url": "https://www.infoq.cn/article/A4610ba*mtsd2Jr5leHV",
+        "title": "如何设计高扩展的在线网页制作平台",
+        "tags": ""
+    }, {
         "url": "https://juejin.im/post/5c473cdae51d45518d4701ff",
         "title": "（译）2019年前端性能优化清单 — 下篇",
         "tags": ""
@@ -1907,4 +1911,3 @@
         "tags": ""
     }]
 }
-        "tags": "xxxx"
