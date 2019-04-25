@@ -1,5 +1,109 @@
 {
     "Favorite": [{
+        "url": "https://mp.weixin.qq.com/s/fgl_GO7bmmzjqxU00nu4Ww",
+        "title": "真正的高手，都有对抗“熵增”的底层思维",
+        "tags": "成长"
+    }, {
+        "url": "https://segmentfault.com/a/1190000018845299",
+        "title": "什么是消息队列？",
+        "tags": "消息队列"
+    }, {
+        "url": "https://juejin.im/post/5cb004da5188251b130c773e",
+        "title": "前端工程师必备：前端的模块化",
+        "tags": "前端模块化"
+    }, {
+        "url": "https://juejin.im/post/5ca1736af265da30ae314248",
+        "title": "跨端开发框架深度横评",
+        "tags": "框架测评"
+    }, {
+        "url": "https://juejin.im/post/5ca0c0abe51d4553a942c17d",
+        "title": "你不知道的浏览器页面渲染机制",
+        "tags": "浏览器渲染"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/bQAECoSk1JaSSB0XZvr6cg",
+        "title": "人生的要务：建立多元的商业模式",
+        "tags": "成长"
+    }, {
+        "url": "https://juejin.im/post/5c7d2d80518825408d6fe2aa",
+        "title": "【前端词典】F5 同 Ctrl+F5 的区别你可了解",
+        "tags": "前端原理"
+    }, {
+        "url": "https://juejin.im/post/5c82323ce51d453a5f22b281",
+        "title": "从前端模块化编程切入想聊聊前端的未来",
+        "tags": "前端模块化"
+    }, {
+        "url": "https://36kr.com/p/5180583?tar_foid=&from=timeline&isappinstalled=0",
+        "title": "错误和失败的区别是什么？",
+        "tags": "成长"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/1ojSrhc9LZV8zlX6YblMtA",
+        "title": "漫画：什么是 HTTPS 协议？",
+        "tags": "网络"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/dWeEtEOX7ur5vLPr0Z6QIA",
+        "title": "分布式系统关注点：无状态",
+        "tags": "分布式"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/6lN1uz348RWau696_3bUlA",
+        "title": "谈谈To B业务的难点",
+        "tags": "产品思维"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/fe8Fg7yd5Jw2g8c6Zy7a9w",
+        "title": "阿里巴巴集团的“大中台、小前台”组织战略",
+        "tags": "组织战略"
+    }, {
+        "url": "https://segmentfault.com/a/1190000018017118",
+        "title": "九种跨域方式实现原理（完整版）",
+        "tags": "前端跨域"
+    }, {
+        "url": "https://baijiahao.baidu.com/s?id=1590915944195270337&wfr=spider&for=pc",
+        "title": "为什么说95%的英语学习者，都是“劣质勤奋者”",
+        "tags": "学习方法"
+    }, {
+        "url": "https://www.infoq.cn/article/zwowtega7KjC4Ad-trp4",
+        "title": "详解前端异步编程的六种方案",
+        "tags": "异步编程"
+    }, {
+        "url": "你真的了解前端模块化吗？",
+        "title": "https://www.infoq.cn/article/QdLtxgNU63-AuY1VOSm7",
+        "tags": "前端模块化"
+    }, {
+        "url": "https://juejin.im/post/5c1311d56fb9a049af6d23ce",
+        "title": "吴恩达：诸位CEO，我有一本「AI转型秘籍」传授给你",
+        "tags": "人工智能"
+    }, {
+        "url": "https://segmentfault.com/a/1190000015665465",
+        "title": "合并HTTP请求 vs 并行HTTP请求，到底谁更快？",
+        "tags": "网络优化"
+    }, {
+        "url": "https://cloud.tencent.com/developer/article/1088760",
+        "title": "浅谈web网站架构演变过程",
+        "tags": "架构"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/iyMgSw9DFTWkOmxzEiYRZQ",
+        "title": "你应该知道的 setTimeout 秘密",
+        "tags": "浏览器执行原理"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/bxFlbbDqjOByPUrGyey88w",
+        "title": "大型网站技术架构（1）",
+        "tags": "架构"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/AItk0-hW8QLlaoT83OaVaA",
+        "title": "浏览器缓存知识小结及应用",
+        "tags": "浏览器缓存"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/4F4-ADKKAEqaWprFh0VrQw",
+        "title": "张维迎最新演讲：知识的本质与企业家精神",
+        "tags": "管理"
+    }, {
+        "url": "https://mp.weixin.qq.com/s/sN1_4WTOWSYYOgzFITxm6g",
+        "title": "Async/Await替代Promise的6个理由",
+        "tags": "异步编程"
+    }, {
+        "url": "https://blog.csdn.net/javazejian/article/details/56267036",
+        "title": "关于 Spring AOP (AspectJ) 你该知晓的一切",
+        "tags": "AOP"
+    }, {
         "url": "https://mp.weixin.qq.com/s/_AGiN_QscZrz49NG0bnhng",
         "title": "Excel的50个逆天功能，动画教程珍藏版！",
         "tags": "财务"
