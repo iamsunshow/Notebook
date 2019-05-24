@@ -11,18 +11,23 @@ const puppeteer = require('puppeteer'),
     let notebook = JSON.parse(fs.readFileSync(path.resolve(__dirname, './index.json'), 'utf-8'));
 
     for (let category in notebook) {
-        for (let { url, title, tags } of notebook[category]) {
-            console.log('');
-            console.log('Category:' + category);
-            console.log('URL:' + url);
-            console.log('Title:' + title);
-            console.log('Tags:' + tags);
-            console.log('');
+        if(category == 'Laboratory'){
+            for (let { url, title, tags } of notebook[category]) {
+                console.log('<DT><A HREF="' + url + '" ADD_DATE="1528252907" ICON="">' + title + '</A>');
+                /*
+                console.log('');
+                console.log('Category:' + category);
+                console.log('URL:' + url);
+                console.log('Title:' + title);
+                console.log('Tags:' + tags);
+                console.log('');
 
-            await page.goto(url);
-            await page.pdf({
-                path: path.resolve(__dirname, './' + category + '/' + title + '.pdf')
-            });
+                await page.goto(url);
+                await page.pdf({
+                    path: path.resolve(__dirname, './' + category + '/' + title + '.pdf')
+                });
+                */
+            }
         }
     }
 
