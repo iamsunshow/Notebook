@@ -1,5 +1,9 @@
 {
     "Favorite": [{
+        "url": "http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html",
+        "title": "如何选择开源许可证？",
+        "tags": "开源"
+    }, {
         "url": "https://mp.weixin.qq.com/s?__biz=MzIxNTAzNzU0Ng==&mid=2654624074&idx=1&sn=3395d9e9d81a9bd334cb017c4771f31f&chksm=8c509a4fbb271359864303905fef637322e1c19edae59a28bbe56238b719adb381ce676ee022&mpshare=1&scene=1&srcid=0428evF5kw2XofmOHWdAoKls#rd",
         "title": "论创新，腾讯和阿里谁更牛？",
         "tags": "创新"
