@@ -11,7 +11,7 @@ const puppeteer = require('puppeteer'),
     let notebook = JSON.parse(fs.readFileSync(path.resolve(__dirname, './index.json'), 'utf-8'));
 
     for (let category in notebook) {
-        if(category == 'Laboratory'){
+        if(category == 'Incomprehension'){
             for (let { url, title, tags } of notebook[category]) {
                 console.log('<DT><A HREF="' + url + '" ADD_DATE="1528252907" ICON="">' + title + '</A>');
                 /*
