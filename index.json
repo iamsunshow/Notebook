@@ -1,5 +1,37 @@
 {
     "Favorite": [{
+        "url": "https://mp.weixin.qq.com/s?__biz=MzIxNDE1NjQ2Mw==&mid=2649872609&idx=1&sn=aaeb5871d369e3e569285dfac55f016f&chksm=8faead21b8d924371c8c9e2fca34a133d60f99762df6c5819d3dc074133deb9578b8ac78d9c5&mpshare=1&scene=1&srcid=#rd",
+        "title": "优秀工程师必备的一项技能，你解锁了吗？",
+        "tags": "学习"
+    }, {
+        "url": "https://mp.weixin.qq.com/s?__biz=MzUyMjE4NjQyMQ==&mid=2247499209&idx=1&sn=f56a1b3b0fc2bc202ec58da2f9fe2e1b&chksm=f9cd0613ceba8f05db5f3f3ff3f82eaff46bf6c9632036e516bf3288ae11894bc4ea56418f54&mpshare=1&scene=1&srcid=06266YDJ1mRb9hI5zitmpSDE#rd",
+        "title": "管理的最高境界是「成就」，而非「控制」",
+        "tags": "管理"
+    }, {
+        "url": "https://mp.weixin.qq.com/s?__biz=MzIxNTAzNzU0Ng==&mid=2654630730&idx=1&sn=c93458951ed05bc9dc17e4c8edd6fed2&chksm=8c50b04fbb273959821506180e7cfd98b7d12fe37916c0e56b0d270ce2b81ee86c343330dad2&mpshare=1&scene=1&srcid=0618HbBd8bkY9OpcjVBIR7ab#rd",
+        "title": "任正非和马化腾的灰度：普通人追求安全感，高手拥抱不确定性",
+        "tags": "成长"
+    }, {
+        "url": "http://mp.weixin.qq.com/s?__biz=MzA4Nzg5Nzc5OA==&mid=2651677768&idx=1&sn=6ad02fae1aaaa5152e227fae96f6dc8c&chksm=8bcba7e1bcbc2ef7671f32016c0a7c5e7baaa8309a70c097a8a11ee1b72c11d06e39334b1988&mpshare=1&scene=1&srcid=#rd",
+        "title": "浅谈几种常见 RAID 的异同",
+        "tags": "运维"
+    }, {
+        "url": "https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247491309&idx=1&sn=0506b5df5c69eb7e66d2ab532a047bbf&chksm=f951abaece2622b8dc93accc0a6438f4d8674703d8afd6e18c2c1e7734540a3ba1885047ab5f&mpshare=1&scene=1&srcid=#rd",
+        "title": "Serverless掀起新的前端技术变革",
+        "tags": "前端"
+    }, {
+        "url": "https://mp.weixin.qq.com/s?__biz=MjM5OTA1MDUyMA==&mid=2655444536&idx=1&sn=8f11403a0377da5758e68422a3098dd2&chksm=bd73124f8a049b592032d41217d13a04491cb54e29141afa74d1e37e038a6ed9b2d80ae0bed5&mpshare=1&scene=1&srcid=0428kWnxRyJymQendpIO1OHH#rd",
+        "title": "有史以来最强的 5G 入门科普！",
+        "tags": "通信"
+    }, {
+        "url": "https://www.cnblogs.com/lfs2640666960/archive/2018/03/12/8551970.html",
+        "title": "如果有人问你数据库的原理，叫他看这篇文章",
+        "tags": "数据库"
+    }, {
+        "url": "https://mp.weixin.qq.com/s?__biz=MzA5OTAyNzQ2OA==&mid=2649700046&idx=1&sn=b04f7a8cee1b243a6b32e5bfad05479e&chksm=889309adbfe480bb4a260f47344f26833aff512e794a5eaba62e0555567bae55006584866251&mpshare=1&scene=1&srcid=01127xFyz83TnRhv0zsErVAJ#rd",
+        "title": "微服务架构下静态数据通用缓存机制",
+        "tags": "架构"
+    }, {
         "url": "http://www.ruanyifeng.com/blog/2011/05/how_to_choose_free_software_licenses.html",
         "title": "如何选择开源许可证？",
         "tags": "开源"
