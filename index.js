@@ -2,33 +2,9 @@ const puppeteer = require('puppeteer'),
       devices = require('puppeteer/DeviceDescriptors'),
       iPhone = devices['iPhone X'], 
       fs = require('fs'), 
-      path = require('path');
-
-/*
-const browser = await puppeteer.launch();
-const page = await browser.newPage();
-
-let notebook = JSON.parse(fs.readFileSync(path.resolve(__dirname, './index.json'), 'utf-8'));
-
-for (let category in notebook) {
-    if(category == 'Incomprehension'){
-        for (let { url, title, tags } of notebook[category]) {
-            console.log('<DT><A HREF="' + url + '" ADD_DATE="1528252907" ICON="">' + title + '</A>');
-            console.log('');
-            console.log('Category:' + category);
-            console.log('URL:' + url);
-            console.log('Title:' + title);
-            console.log('Tags:' + tags);
-            console.log('');
-
-            await page.goto(url);
-            await page.pdf({
-                path: path.resolve(__dirname, './' + category + '/' + title + '.pdf')
-            });
-        }
-    }
-}
-*/
+      path = require('path'),
+      jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 
 async function processBookListFromWeiXin(url){
     console.log('Browser init...');
@@ -42,13 +18,13 @@ async function processBookListFromWeiXin(url){
     await page.goto(url);
     console.log('Browser process data...');
 
-    const title = await page.$eval('.rich_media_title', tags => tags.innerHTML);
+    const title = await page.$eval('.rich_media_title', tags => tags.innerText);
 
     const c = await page.$$eval('*', function(tags){
         const tagNames = [];
 
         tags.forEach(function(tag){
-            const content = tag.innerHTML;
+            const content = tag.innerText;
             const reg = /《[^》]+》/g; 
             let result;
 
@@ -131,8 +107,26 @@ async function appendDataToBookList(data){
     return removeDuplication(oldData.concat(data));
 }
 
+async function cleanData(data){
+    data.forEach(function(element){
+        /*
+        var name = element.name;
+        if(name.indexOf('</') >= 0){
+            const dom = new JSDOM(name);
+            element.name = dom.window.document.querySelector("span").textContent; 
+            console.log(element.name)
+        }
+        */
+        element.recommend = Array.from(new Set(element.recommend));
+    });
+
+    return data;
+}
+
 async function writeDataToFile(data){
-    fs.writeFileSync(path.resolve(__dirname, './BookList/data.json'), JSON.stringify(data), 'utf-8');
+    var result = await cleanData(data);
+
+    fs.writeFileSync(path.resolve(__dirname, './BookList/data.json'), JSON.stringify(result), 'utf-8');
 }
 
 (async () => {
@@ -172,7 +166,7 @@ async function writeDataToFile(data){
     //https://mp.weixin.qq.com/s?__biz=MzU5OTI0NTc3Mg==&mid=2247487300&idx=1&sn=66dd12daf9aa284e5348ada6afc39808&chksm=feb699e7c9c110f16dc59e4855162aea023583e930ebc988e604b0aa37464a15eab54b33e946&mpshare=1&scene=1&srcid=#rd
     //https://mp.weixin.qq.com/s?__biz=MjM5NzUzODI1Mg==&mid=2652567292&idx=1&sn=8c47a0a26a868a23f2e631b6b89447c8&chksm=bd36265f8a41af49eaf5c0f777fa336342212507985fdd9b039c41bd872141fc5657009f6270&mpshare=1&scene=1&srcid=#rd
 
-    const data = await processBookListFromWeiXin('##########');
+    const data = await processBookListFromWeiXin('https://mp.weixin.qq.com/s?__biz=MjM5NTk0NjMwOQ==&mid=2651090890&idx=1&sn=61c1d4a69b80629c13810f18ed2b5c1b&chksm=bd0005e08a778cf6ca045dd16451a25744ee73bbe426a9a6c44c0ae23e93935a357f0dae6796&mpshare=1&scene=1&srcid=#rd');
 
     console.log('process new data count:' + data.length);
 
