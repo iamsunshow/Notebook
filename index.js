@@ -16,14 +16,16 @@ async function processBookList(url){
 
     console.log('Browser fetch data...');
     await page.goto(url);
+    await page.waitFor(1000);
     console.log('Browser process data...');
 
-    const title = await page.$eval('.rich_media_title', tags => tags.innerText);
+    const title = await page.$eval('h1', tags => tags.innerText);
 
     console.log('##########new book title beigin##########')
     console.log(title);
     console.log('##########new book title beigin##########')
 
+    /*
     const c = await page.$$eval('.rich_media_content p span', function(tags){
         const tagNames = [];
 
@@ -42,7 +44,7 @@ async function processBookList(url){
         
         return [...new Set(tagNames)];
     });
-    /*
+    */
     const c = await page.$$eval('*', function(tags){
         const tagNames = [];
 
@@ -61,7 +63,6 @@ async function processBookList(url){
         
         return [...new Set(tagNames)];
     });
-    */
 
     let result = [];
 
@@ -160,7 +161,7 @@ async function writeDataToFile(data){
     https://www.digitaling.com/articles/168020.html?from=timeline&isappinstalled=0
     https://www.jianshu.com/p/a56b7dd85489
     */
-    const data = await processBookList('https://mp.weixin.qq.com/s/HP_tu5xDS6UrXxqLiH_3dA');
+    const data = await processBookList('https://www.infoq.cn/article/ur1QLockeQ*hXobPm0kI?utm_source=tuicool&utm_medium=referral');
 
     console.log('process new data count:' + data.length);
 
