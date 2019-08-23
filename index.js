@@ -6,7 +6,7 @@ const puppeteer = require('puppeteer'),
       jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 
-async function processBookList(url){
+async function extractBookList(extractData){
     console.log('Browser init...');
 
     const browser = await puppeteer.launch();
@@ -15,37 +15,22 @@ async function processBookList(url){
     await page.emulate(iPhone);
 
     console.log('Browser fetch data...');
-    await page.goto(url);
-    await page.waitFor(1000);
+
+    await page.goto(extractData.url);
+
+    if(extractData.jsRender){
+        await page.waitFor(1000);
+    }
+
     console.log('Browser process data...');
 
-    const title = await page.$eval('h1', tags => tags.innerText);
+    const title = await page.$eval(extractData.titleSelector, tags => tags.innerText);
 
     console.log('##########new book title beigin##########')
     console.log(title);
     console.log('##########new book title beigin##########')
 
-    /*
-    const c = await page.$$eval('.rich_media_content p span', function(tags){
-        const tagNames = [];
-
-        tags.forEach(function(tag){
-            const content = tag.innerText;
-            const reg = /\[\d+\]\.[^，]+/g; 
-            let result;
-
-            while(result = reg.exec(content)){
-                var r = result[0].trim();
-                if(!tagNames.includes(r)){
-                    tagNames.push(r);
-                }
-            }
-        });
-        
-        return [...new Set(tagNames)];
-    });
-    */
-    const c = await page.$$eval('*', function(tags){
+    const c = await page.$$eval(extractData.contentSelector, function(tags){
         const tagNames = [];
 
         tags.forEach(function(tag){
@@ -161,7 +146,12 @@ async function writeDataToFile(data){
     https://www.digitaling.com/articles/168020.html?from=timeline&isappinstalled=0
     https://www.jianshu.com/p/a56b7dd85489
     */
-    const data = await processBookList('https://www.infoq.cn/article/ur1QLockeQ*hXobPm0kI?utm_source=tuicool&utm_medium=referral');
+    const data = await extractBookList({
+        url: 'https://www.infoq.cn/article/ur1QLockeQ*hXobPm0kI?utm_source=tuicool&utm_medium=referral',
+        titleSelector: 'h1',
+        contentSelector: '*',
+        jsRender: false
+    });
 
     console.log('process new data count:' + data.length);
 
