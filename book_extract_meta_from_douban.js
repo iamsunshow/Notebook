@@ -138,7 +138,7 @@ async function extractBookList(extractData){
     if(!title || !href || !score || !author) 
         return null;
     else
-        return `${title}##${originTitle}##${high}##${match}##${score}##${author}##${href}`;
+        return `${title}#${originTitle}#${high}#${match}#${score}#${author}#${href}`;
 }
 
 // 数据见README
