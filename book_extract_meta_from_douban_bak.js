@@ -14,61 +14,61 @@ async function extractBookList(extractData){
     await page.emulate(devices[`iPhone X`]);
     await page.setCookie({
         name: '__utmv',
-        value: '30149280.26378',
+        value: '30149280.4981',
         domain: '.douban.com',
         path: '/',
-        expire: '2024-10-24T03:34:54.000Z'
+        expire: '2022-10-19T10:49:00.000Z'
     }, {
         name: '__utmt',
         value: '1',
         domain: '.douban.com',
         path: '/',
-        expire: '2022-10-25T03:44:54.000Z'
+        expire: '2022-10-19T10:49:00.000Z'
     }, {
         name: '__utmb',
-        value: '30149280.2.10.1666668894',
+        value: '30149280.2.10.1666175941',
         domain: '.douban.com',
         path: '/',
-        expire: '2022-10-25T04:04:54.000Z'
+        expire: '2022-10-19T11:09:00.000Z'
     }, {
         name: '__utmz',
-        value: '30149280.1666270868.2.2.utmcsr=book.douban.com|utmccn=(referral)|utmcmd=referral|utmcct=/',
+        value: '30149280.1666175941.1.1.utmcsr=accounts.douban.com|utmccn=(referral)|utmcmd=referral|utmcct=/',
         domain: '.douban.com',
         path: '/',
-        expire: '2023-04-25T15:34:54.000Z'
+        expire: '2023-04-19T22:39:00.000Z'
     }, {
         name: '__utma',
-        value: '30149280.1435678354.1666265164.1666312497.1666668894.4',
+        value: '30149280.1784161962.1666175941.1666175941.1666175941.1',
         domain: '.douban.com',
         path: '/',
-        expire: '2024-10-24T03:34:54.000Z'
+        expire: '2024-10-18T10:39:00.000Z'
     }, {
         name: 'push_noty_num',
         value: '0',
         domain: '.douban.com',
         path: '/',
-        expire: '2022-11-24T03:34:54.000Z'
+        expire: '2022-11-18T10:39:00.000Z'
     }, {
         name: '_pk_ref.100001.2939',
-        value: '%5B%22%22%2C%22%22%2C1666668894%2C%22https%3A%2F%2Fbook.douban.com%2F%22%5D',
+        value: '%5B%22%22%2C%22%22%2C1666175941%2C%22https%3A%2F%2Faccounts.douban.com%2F%22%5D',
         domain: 'search.douban.com',
         path: '/',
-        expire: '2023-04-25T15:34:54.000Z'
+        expire: '2023-04-19T22:39:00.000Z'
     }, {
         name: '_pk_ses.100001.2939',
         value: '*',
         domain: 'search.douban.com',
         path: '/',
-        expire: '2022-10-25T04:04:54.000Z'
+        expire: '2022-10-19T11:09:00.000Z'
     }, {
         name: '_pk_id.100001.2939',
-        value: '035f21ddd9acb30b.1666265164.4.1666668894.1666314518.',
+        value: '31aba00f3a9ca5f2.1666175941.1.1666175941.1666175941.',
         domain: 'search.douban.com',
         path: '/',
-        expire: '2024-10-24T03:34:54.000Z'
+        expire: '2024-10-18T10:39:00.000Z'
     }, {
         name: 'ck',
-        value: 'iyS3',
+        value: 'pcYr',
         domain: '.douban.com',
         path: '/'
     }, {
@@ -78,22 +78,22 @@ async function extractBookList(extractData){
         path: '/'
     }, {
         name: 'dbcl2',
-        value: '"263786629:mXxTw0oBoO4"',
+        value: '"49812717:/eudpt24VPA"',
         domain: '.douban.com',
         path: '/',
-        expire: '2022-11-19T11:29:57.058Z'
+        expire: '2022-11-18T10:38:59.504Z'
     }, {
         name: 'push_doumail_num',
         value: '0',
         domain: '.douban.com',
         path: '/',
-        expire: '2022-11-24T03:34:54.000Z'
+        expire: '2022-11-18T10:39:00.000Z'
     }, {
         name: 'bid',
-        value: 'kSu1TaBLA7g',
+        value: 'F8Ftg2DXzC4',
         domain: '.douban.com',
         path: '/',
-        expire: '2023-10-20T11:26:03.443Z'
+        expire: '2023-10-19T10:37:55.081Z'
     });
 
     //console.log(`DEBUG:`, extractData.url)
@@ -107,43 +107,27 @@ async function extractBookList(extractData){
     //console.log(`INFO:Browser process data...`);
 
 
-    let list = [];
-
-    const books = await page.$$(`.sc-bxivhb`);
-
-    for(let i = 0;i < books.length;i++){
-        const title  = await books[i].$eval('.title-text', (element) => element.innerText);
-        const href  = await books[i].$eval('.title-text', (element) => element.href);
-        const pl  = await books[i].$eval('.pl', (element) => element.innerText);
-        const meta  = await books[i].$eval('.meta', (element) => element.innerText);
-        let rating_nums = -1;
-        try{
-            rating_nums  = await books[i].$eval('.rating_nums', (element) => element.innerText);
-        }catch(e){ }
-
-        list.push({
-            title: title,
-            href: href,
-            pl: pl,
-            meta: meta,
-            rating_nums: rating_nums
-        });
-    }
-
-    let result;
-
-    for(let j = 0; j < list.length;j++){
-        if(list[j].title == extractData.originTitle) result = list[j];
-    }
-
-
-
-/*
-    books.forEach(function(book){
-        console.log('####', book)
+    const title = await page.$$eval(`.title-text`, function(tags){
+        return tags.length > 0 ? tags[0][`innerText`] : ``;
     });
-*/
 
+    const href = await page.$$eval(`.title-text`, function(tags){
+        return tags.length > 0 ? tags[0][`href`] : ``;
+    });
+
+    const score = await page.$$eval(`.rating_nums`, function(tags){
+        return tags.length > 0 ? tags[0][`innerText`] : ``;
+    });
+
+    const author = await page.$$eval(`.meta`, function(tags){
+        return tags.length > 0 ? tags[0][`innerText`] : ``;
+    });
+
+    const originTitle = extractData.originTitle;
+
+    const match = title == originTitle ? 1 : 0;
+
+    const high = parseInt(score) >= 9 ? 1 : 0;
 
     //console.log(`INFO:Browser process finish.`);
 
@@ -151,15 +135,17 @@ async function extractBookList(extractData){
 
     //console.log(`INFO:Browser closed.`);
 
-    return result;
+    if(!title || !href || !score || !author) 
+        return null;
+    else
+        return `${title}#${originTitle}#${high}#${match}#${score}#${author}#${href}`;
 }
 
 // 数据见README
 const REPEATED_BOOK_LIST = [
-`计算机程序设计艺术・卷1 : 基本算法（第3版）`,
+`计算机程序设计艺术・卷2 : 基本算法（第3版）`,
 `科学革命的结构`,
-`营销管理（第16版）`,
-`营销管理（第18888版）`
+`营销管理（第16版）`
 ];
 
 (async () => {
@@ -173,15 +159,13 @@ const REPEATED_BOOK_LIST = [
 
     let n = 0;
 
-    const UNREPEATED_BOOK_LIST =  Array.from(new Set(REPEATED_BOOK_LIST));
-
+    const BOOK_LIST =  Array.from(new Set(REPEATED_BOOK_LIST));
+    fs.writeFileSync(path.resolve(__dirname, './book/book_list.txt'), BOOK_LIST.join('\n'), 'utf-8');
     let NEW_BOOK_LIST = [];
     let RETRY_BOOK_LIST = [];
 
-    fs.writeFileSync(path.resolve(__dirname, './book/book_list.txt'), UNREPEATED_BOOK_LIST.join('\n'), 'utf-8');
-
     let tid = setInterval(async function(){
-        if(n == UNREPEATED_BOOK_LIST.length) {
+        if(n == BOOK_LIST.length) {
             fs.writeFileSync(path.resolve(__dirname, './book/new_book_list.txt'), NEW_BOOK_LIST.join('\n'), 'utf-8');
             fs.writeFileSync(path.resolve(__dirname, './book/retry_book_list.txt'), RETRY_BOOK_LIST.join('\n'), 'utf-8');
             
@@ -191,9 +175,7 @@ const REPEATED_BOOK_LIST = [
             return;
         }
 
-        const title = UNREPEATED_BOOK_LIST[n];
-
-        console.log(`DEBUG:`, ((n + 1) / (UNREPEATED_BOOK_LIST.length) * 100).toFixed(2) + '%', n, UNREPEATED_BOOK_LIST.length, title);
+        const title = BOOK_LIST[n++];
 
         const data = await extractBookList({
             url: `https://search.douban.com/book/subject_search?search_text=${encodeURIComponent(title)}&cat=1001`,
@@ -201,13 +183,13 @@ const REPEATED_BOOK_LIST = [
             jsRender: true
         });
 
+        console.log(`DEBUG:`, (n / (BOOK_LIST.length - 1) * 100).toFixed(2) + '%', title);
+
         if(data)
-            NEW_BOOK_LIST.push(`${data.title}#${data.href}#${data.rating_nums}#${data.pl}`);
+            NEW_BOOK_LIST.push(data);
         else
             RETRY_BOOK_LIST.push(title);
 
-        n++;
-
-    }, 10000);
+    }, 4000);
 
 })();
