@@ -6,12 +6,19 @@ const puppeteer = require(`puppeteer`),
 async function extractBookList(extractData){
     //console.log(`INFO:Browser init...`);
 
+    // 启动puppeteer
     const browser = await puppeteer.launch();
+    
+    // 创建新的标签页
     const page = await browser.newPage();
 
+    // 创建UA仿真环境
     page.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4182.0 Safari/537.36");
 
+    // 创建模拟的移动浏览器仿真环境
     await page.emulate(devices[`iPhone X`]);
+
+    // 创建cookie的仿真环境
     await page.setCookie({
         name: '__utmv',
         value: '30149280.26378',
@@ -98,8 +105,10 @@ async function extractBookList(extractData){
 
     console.log(`DEBUG:`, extractData.url)
 
+    // 访问需要访问的url
     await page.goto(extractData.url);
 
+    // 考虑有些页面是通过js进行渲染，故延时几秒再获取dom内容
     if(extractData.jsRender){
         await page.waitFor(1000);
     }
@@ -107,10 +116,13 @@ async function extractBookList(extractData){
     //console.log(`INFO:Browser process data...`);
 
 
+    // 当前页面查询到的所有匹配记录的列表
     let list = [];
 
+    // 设定列表的过滤规则
     const books = await page.$$(`.sc-bxivhb`);
 
+    // 遍历列表对象，寻找每个对象内部的可用信息，如标题，地址，书籍的原始数据等
     for(let i = 0;i < books.length;i++){
         const title  = await books[i].$eval('.title-text', (element) => element.innerText);
         const href  = await books[i].$eval('.title-text', (element) => element.href);
@@ -119,10 +131,12 @@ async function extractBookList(extractData){
         let rating_nums = -1;
 
         try{
+            // 因为不存在此节点语句就会报错，故捕获异常并保持字段为初值，即-1
             pl = await books[i].$eval('.pl', (element) => element.innerText);
             rating_nums  = await books[i].$eval('.rating_nums', (element) => element.innerText);
         }catch(e){ }
 
+        // 将摘取的可用信息作为新的数据对象传入列表
         list.push({
             title: title,
             href: href,
@@ -132,10 +146,24 @@ async function extractBookList(extractData){
         });
     }
 
+    // 实际返回的结果，一个唯一值
     let result;
+    let highScore = 0;
 
+    // 遍历列表中所有符合查询条件的记录，分数最高，且名称匹配记录
     for(let j = 0; j < list.length;j++){
-        if(list[j].title == extractData.originTitle) result = list[j];
+        let t = list[j].title;
+        let s = parseFloat(list[j].rating_nums);
+
+        console.log(`DEBUG:`, j, extractData.originTitle, t, s)
+        
+        // 按照标题符合就算符合来进行过滤
+        if((t == extractData.originTitle || t.indexOf(extractData.originTitle) >= 0)
+        && s >= highScore) {
+            highScore = s;
+            result = list[j];
+            console.log(`DEBUG:HIGH SCORE`, j, extractData.originTitle, t, s)
+        }
     }
 
 
@@ -149,16 +177,76 @@ async function extractBookList(extractData){
 
     //console.log(`INFO:Browser process finish.`);
 
+    // 关闭浏览器
     await browser.close();
 
     //console.log(`INFO:Browser closed.`);
 
+    // 返回唯一值
     return result;
 }
 
 
 
 const REPEATED_BOOK_LIST = [
+`C++ Templates（第2版 英文版）`,
+`最後的問題 : 西方短篇科幻小說精選`,
+`中华人民共和国国民经济和社会发展第十三个五年规划纲要`,
+`DK艺术博物馆：世界名作全景导读`,
+`第三方JavaScript编程`,
+`结构化计算机组成`,
+`Microsoft.NET框架程序设计`,
+`Java安全编码标准`,
+`唐山 : 一个世纪的故事`,
+`数据结构与算法分析 : Java语言描述（英文版·第3版）`,
+`数字逻辑应用与设计`,
+`HR劳动争议经典管理案例`,
+`复杂SOC设计`,
+`计算机体系结构 : 计算机体系结构嵌入式方法`,
+`山中小记：圆霖长老随缘开示`,
+`做个不骂孩子的妈妈 : 亲子语言沟通对错280句`,
+`程序设计方法（第2版）`,
+`网络体系结构及设计`,
+`性能之巅（第2版）：系统、企业与云可观测性`,
+`Web 2.0界面设计模式`,
+`怎样给孩子讲故事`,
+`老舍作品选读`,
+`UNIX系统编程: 通信、并发与线程`,
+`多处理器编程的艺术（原书第2版）`,
+`好奇宝贝科学思维系列绘本：这是谁的牙齿`,
+`计算复杂性理论基础`,
+`明天要遠足`,
+`行为自动机研究 : 选择性综合神经模拟`,
+`我们属龙`,
+`Java Collections`,
+`思维规律的研究`,
+`黑客大曝光 : Web应用安全机密与解决方案（第2版）`,
+`学会跟孩子说话`,
+`明日边缘`,
+`第一性－女人的天賦正在改變世界`,
+`Linux服务器架设、性能调优、集群管理教程 : 实训与项目案例`,
+`不对称陷阱 : 當別人的風險變成你的風險，如何解決隱藏在生活中的不對等困境`,
+`认识大脑开发大脑 : 认识大脑开发大脑`,
+`名画之谜 : 51幅世界杰作的秘密`,
+`Java I/O (O'Reilly Java)`,
+`強勢領導的迷思 : 從林肯到歐巴馬，我們到底想要哪一種政治領袖？`,
+`Web Hacking : Attacks and Defense`,
+`运动改变大脑`,
+`数字设计原理与实践`,
+`管理：使命、责任、实践（使命篇）`,
+`兰海说成长 : 懂得孩子，才能更好帮助孩子`,
+`開發精確的思考`,
+`環境理性與制度抉擇`,
+`民族进化的心理定律`,
+`Linux嵌入式系统高级程序设计`,
+`简素 : 日本文化的底色`,
+`给孩子的世界地理大数据（全六册）`,
+`公共管理论丛`,
+`The World According to Star Wars`,
+`Linux内核API完全参考手册`,
+`架构之美：行业思想领袖揭秘软件设计之美（评注版）`
+];
+const REPEATED_BOOK_LIST_BAK = [
 `计算机程序设计艺术・卷1 : 基本算法（第3版）`,
 `科学革命的结构`,
 `营销管理（第16版）`,
@@ -1635,14 +1723,18 @@ const REPEATED_BOOK_LIST = [
 
     let n = 0;
 
+    // 数据去重
     const UNREPEATED_BOOK_LIST =  Array.from(new Set(REPEATED_BOOK_LIST));
 
     let NEW_BOOK_LIST = [];
     let RETRY_BOOK_LIST = [];
 
+    // 去重后数据写入文档
     fs.writeFileSync(path.resolve(__dirname, './book/book_list.txt'), UNREPEATED_BOOK_LIST.join('\n'), 'utf-8');
 
+    // 每隔十秒进行一次数据拉取
     let tid = setInterval(async function(){
+        // 如果是最后一个就退出定时器，同时将新图书列表写入文件，以及需要重试的记录写入文件
         if(n == UNREPEATED_BOOK_LIST.length) {
             fs.writeFileSync(path.resolve(__dirname, './book/new_book_list.txt'), NEW_BOOK_LIST.join('\n'), 'utf-8');
             fs.writeFileSync(path.resolve(__dirname, './book/retry_book_list.txt'), RETRY_BOOK_LIST.join('\n'), 'utf-8');
@@ -1653,16 +1745,19 @@ const REPEATED_BOOK_LIST = [
             return;
         }
 
+        // 获取一条书名
         const title = UNREPEATED_BOOK_LIST[n];
 
         console.log(`DEBUG:`, ((n + 1) / (UNREPEATED_BOOK_LIST.length) * 100).toFixed(2) + '%', n, UNREPEATED_BOOK_LIST.length, title);
 
+        // 根据书名获取相应的记录
         const data = await extractBookList({
             url: `https://search.douban.com/book/subject_search?search_text=${encodeURIComponent(title)}&cat=1001`,
             originTitle: title,
             jsRender: true
         });
 
+        // 如果获取到数据就写入列表，失败就写入重试列表
         if(data)
             NEW_BOOK_LIST.push(`${data.title}#${data.href}#${data.rating_nums}#${data.pl}#${data.meta}`);
         else
